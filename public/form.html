@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form - Neobrutalist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Archivo+Black&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-cream: #F5F1E8;
+            --black: #000000;
+            --white: #FFFFFF;
+            --coral: #FF6B6B;
+            --mint: #4ECDC4;
+            --yellow: #FFE66D;
+            --blue: #95E1D3;
+            --purple: #A8E6CF;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--bg-cream);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .form-wrapper {
+            background: var(--white);
+            border: 5px solid var(--black);
+            box-shadow: 12px 12px 0 var(--black);
+            padding: 3rem;
+            position: relative;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-header {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .form-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2.5rem;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .form-subtitle {
+            font-size: 0.95rem;
+            color: var(--black);
+            opacity: 0.7;
+        }
+
+        .accent-bar {
+            width: 80px;
+            height: 8px;
+            background: var(--coral);
+            margin-top: 1rem;
+            border: 2px solid var(--black);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            animation: fadeIn 0.8s ease-out backwards;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.3s; }
+        .form-group:nth-child(4) { animation-delay: 0.4s; }
+        .form-group:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        label {
+            display: block;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            color: var(--black);
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            border: 3px solid var(--black);
+            background: var(--white);
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            transform: translate(-3px, -3px);
+            box-shadow: 6px 6px 0 var(--black);
+        }
+
+        input:hover,
+        select:hover {
+            background: #FFFEF8;
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='black' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 3rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            animation: fadeIn 1s ease-out 0.6s backwards;
+        }
+
+        button {
+            flex: 1;
+            padding: 1rem 2rem;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 3px solid var(--black);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .btn-submit {
+            background: var(--coral);
+            color: var(--white);
+        }
+
+        .btn-submit:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 8px 8px 0 var(--black);
+        }
+
+        .btn-submit:active {
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0 var(--black);
+        }
+
+        .btn-reset {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .btn-reset:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 8px 8px 0 var(--black);
+        }
+
+        .btn-reset:active {
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0 var(--black);
+        }
+
+        .decorative-element {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--black);
+            z-index: -1;
+        }
+
+        .deco-1 {
+            background: var(--yellow);
+            top: -20px;
+            right: -20px;
+            transform: rotate(15deg);
+        }
+
+        .deco-2 {
+            background: var(--mint);
+            bottom: -20px;
+            left: -20px;
+            transform: rotate(-12deg);
+        }
+
+        .deco-3 {
+            background: var(--blue);
+            top: 50%;
+            right: -30px;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+        }
+
+        @media (max-width: 640px) {
+            .form-wrapper {
+                padding: 2rem;
+                box-shadow: 8px 8px 0 var(--black);
+            }
+
+            .form-title {
+                font-size: 2rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .decorative-element {
+                display: none;
+            }
+        }
+
+        .success-message {
+            display: none;
+            padding: 1rem;
+            background: var(--mint);
+            border: 3px solid var(--black);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Micro-interactions CSS */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .shake {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .char-counter {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--coral);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        input:focus + .char-counter {
+            opacity: 1;
+        }
+
+        .floating-label {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            font-weight: 400;
+            color: rgba(0, 0, 0, 0.4);
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        input:focus + .floating-label,
+        input:not(:placeholder-shown) + .floating-label {
+            top: -0.5rem;
+            left: 0.5rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            background: var(--white);
+            padding: 0 0.5rem;
+            color: var(--coral);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        input::placeholder,
+        select option:first-child {
+            opacity: 0;
+        }
+
+        input:focus::placeholder {
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Checkbox animation for form validation */
+        .validation-check {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%) scale(0);
+            width: 20px;
+            height: 20px;
+            background: var(--mint);
+            border: 2px solid var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .validation-check.show {
+            transform: translateY(-50%) scale(1);
+        }
+
+        .validation-check::after {
+            content: '✓';
+            color: var(--black);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* Button loading state */
+        .btn-submit.loading {
+            pointer-events: none;
+            position: relative;
+            color: transparent;
+        }
+
+        .btn-submit.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 3px solid var(--white);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spinner 0.8s linear infinite;
+        }
+
+        @keyframes spinner {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Decorative elements animation */
+        .decorative-element {
+            transition: all 0.3s ease;
+        }
+
+        .form-wrapper:hover .deco-1 {
+            transform: rotate(25deg) scale(1.1);
+        }
+
+        .form-wrapper:hover .deco-2 {
+            transform: rotate(-22deg) scale(1.1);
+        }
+
+        .form-wrapper:hover .deco-3 {
+            transform: scale(1.2);
+        }
+
+        /* Select dropdown animation */
+        select {
+            transition: all 0.2s ease;
+        }
+
+        select:focus {
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 7L6 2L11 7' stroke='black' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E");
+        }
+
+        /* Label bounce on focus */
+        @keyframes labelBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        label.active {
+            animation: labelBounce 0.4s ease;
+        }
+
+        /* Progress bar */
+        .form-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--coral);
+            width: 0;
+            transition: width 0.3s ease;
+            z-index: 10;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: var(--black);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            margin-bottom: 8px;
+        }
+
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: var(--black);
+        }
+
+        button:hover .tooltip {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-wrapper">
+            <div class="form-progress" id="formProgress"></div>
+            <div class="decorative-element deco-1"></div>
+            <div class="decorative-element deco-2"></div>
+            <div class="decorative-element deco-3"></div>
+
+            <div class="form-header">
+                <h1 class="form-title">Get in Touch</h1>
+                <p class="form-subtitle">Fill out the form below and we'll get back to you ASAP!</p>
+                <div class="accent-bar"></div>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                ✓ Form submitted successfully!
+            </div>
+
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="name" name="name" required placeholder="John Doe" maxlength="50">
+                        <span class="validation-check"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <div class="input-wrapper">
+                        <input type="email" id="email" name="email" required placeholder="john@example.com">
+                        <span class="validation-check"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">Contact Number *</label>
+                    <div class="input-wrapper">
+                        <input type="tel" id="contact" name="contact" required placeholder="+1 (555) 123-4567">
+                        <span class="validation-check"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="branch">Branch *</label>
+                    <div class="input-wrapper">
+                        <select id="branch" name="branch" required>
+                            <option value="">Select a branch</option>
+                            <option value="north">North Branch</option>
+                            <option value="south">South Branch</option>
+                            <option value="east">East Branch</option>
+                            <option value="west">West Branch</option>
+                            <option value="central">Central Branch</option>
+                        </select>
+                        <span class="validation-check"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="position">Position *</label>
+                    <div class="input-wrapper">
+                        <select id="position" name="position" required>
+                            <option value="">Select a position</option>
+                            <option value="developer">Software Developer</option>
+                            <option value="designer">UX/UI Designer</option>
+                            <option value="manager">Project Manager</option>
+                            <option value="analyst">Business Analyst</option>
+                            <option value="engineer">Systems Engineer</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <span class="validation-check"></span>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn-submit">
+                        Submit
+                        <span class="tooltip">Send your info!</span>
+                    </button>
+                    <button type="reset" class="btn-reset">
+                        Reset
+                        <span class="tooltip">Clear all fields</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+  <script>
+        const form = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        const formProgress = document.getElementById('formProgress');
+        const inputs = document.querySelectorAll('input, select');
+        const submitButton = form.querySelector('.btn-submit');
+
+        // Progress bar calculation
+        function updateProgress() {
+            const totalFields = inputs.length;
+            let filledFields = 0;
+
+            inputs.forEach(input => {
+                if (input.value.trim() !== '' && input.value !== input.querySelector('option')?.value) {
+                    filledFields++;
+                }
+            });
+
+            const progress = (filledFields / totalFields) * 100;
+            formProgress.style.width = progress + '%';
+        }
+
+        // Validation check marks
+        function showValidationCheck(input) {
+            const wrapper = input.closest('.input-wrapper');
+            if (wrapper) {
+                const check = wrapper.querySelector('.validation-check');
+                if (check && input.validity.valid && input.value.trim() !== '') {
+                    check.classList.add('show');
+                } else if (check) {
+                    check.classList.remove('show');
+                }
+            }
+        }
+
+        // Label bounce animation
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                const label = this.parentElement.parentElement.querySelector('label');
+                if (label) {
+                    label.classList.add('active');
+                    setTimeout(() => label.classList.remove('active'), 400);
+                }
+                this.parentElement.style.transform = 'translateX(4px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateX(0)';
+                showValidationCheck(this);
+            });
+
+            // Real-time validation and progress update
+            input.addEventListener('input', function() {
+                showValidationCheck(this);
+                updateProgress();
+            });
+
+            input.addEventListener('change', function() {
+                showValidationCheck(this);
+                updateProgress();
+            });
+        });
+
+        // Ripple effect on buttons
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const ripple = document.createElement('span');
+            const rect = button.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = event.clientX - rect.left - size / 2;
+            const y = event.clientY - rect.top - size / 2;
+
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+
+            button.appendChild(ripple);
+
+            setTimeout(() => ripple.remove(), 600);
+        }
+
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', createRipple);
+        });
+
+        // Form submission with loading state
+       form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    let isValid = true;
+    inputs.forEach(input => {
+        if (!input.validity.valid || input.value.trim() === '') {
+            isValid = false;
+            const wrapper = input.closest('.input-wrapper') || input;
+            wrapper.classList.add('shake');
+            setTimeout(() => wrapper.classList.remove('shake'), 400);
+        }
+    });
+
+    if (!isValid) return;
+
+    submitButton.classList.add('loading');
+
+    const formData = new FormData(form);
+
+    try {
+        const response = await fetch('/submit', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Server error');
+        }
+
+        submitButton.classList.remove('loading');
+        successMessage.classList.add('show');
+
+        setTimeout(() => {
+            form.reset();
+            successMessage.classList.remove('show');
+        }, 3000);
+
+    } catch (err) {
+        console.error(err);
+        submitButton.classList.remove('loading');
+        alert("Server error. Please try again.");
+    }
+});
+
+            // Add loading state to submit button
+            submitButton.classList.add('loading');
+            
+            // Get form data
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            console.log('Form submitted:', data);
+            
+            // Simulate submission delay
+            setTimeout(() => {
+                // Remove loading state
+                submitButton.classList.remove('loading');
+                
+                // Show success message
+                successMessage.classList.add('show');
+                
+                // Scroll to top smoothly
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Reset progress bar
+                formProgress.style.width = '0%';
+                
+                // Clear validation checks
+                document.querySelectorAll('.validation-check').forEach(check => {
+                    check.classList.remove('show');
+                });
+                
+                // Reset form after delay
+                setTimeout(() => {
+                    form.reset();
+                    setTimeout(() => {
+                        successMessage.classList.remove('show');
+                    }, 3000);
+                }, 2000);
+            }, 1500);
+        });
+
+        // Reset button clears validation and progress
+        form.addEventListener('reset', function() {
+            setTimeout(() => {
+                formProgress.style.width = '0%';
+                document.querySelectorAll('.validation-check').forEach(check => {
+                    check.classList.remove('show');
+                });
+            }, 10);
+        });
+
+        // Input field hover effect
+        inputs.forEach(input => {
+            input.addEventListener('mouseenter', function() {
+                this.style.borderColor = 'var(--coral)';
+            });
+            
+            input.addEventListener('mouseleave', function() {
+                if (document.activeElement !== this) {
+                    this.style.borderColor = 'var(--black)';
+                }
+            });
+        });
+
+        // Decorative elements follow cursor (subtle)
+        let mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX / window.innerWidth;
+            mouseY = e.clientY / window.innerHeight;
+        });
+
+        function animateDecorations() {
+            const deco1 = document.querySelector('.deco-1');
+            const deco2 = document.querySelector('.deco-2');
+            const deco3 = document.querySelector('.deco-3');
+
+            if (deco1) {
+                const x1 = mouseX * 10;
+                const y1 = mouseY * 10;
+                deco1.style.transform = `rotate(${15 + mouseX * 20}deg) translate(${x1}px, ${y1}px)`;
+            }
+
+            if (deco2) {
+                const x2 = mouseX * -8;
+                const y2 = mouseY * -8;
+                deco2.style.transform = `rotate(${-12 - mouseX * 15}deg) translate(${x2}px, ${y2}px)`;
+            }
+
+            if (deco3) {
+                const x3 = mouseX * 5;
+                const y3 = mouseY * 5;
+                deco3.style.transform = `translate(${x3}px, ${y3}px) scale(${1 + mouseX * 0.2})`;
+            }
+
+            requestAnimationFrame(animateDecorations);
+        }
+
+        animateDecorations();
+
+        // Initialize progress on page load
+        updateProgress();
+    </script>
+</body>
+</html>

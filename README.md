@@ -4,20 +4,89 @@
 
 This project is a Node.js web application that collects user form submissions and stores them as CSV files in a Google Cloud Storage bucket.
 
-The application runs on a Google Compute Engine virtual machine and uses IAM-based authentication for secure communication with Google Cloud services. Each submission creates a uniquely named CSV file to prevent overwriting and to remain compatible with bucket retention policies.
+The application runs on a Google Compute Engine virtual machine and uses IAM-based authentication for secure communication with Google Cloud services.
+
+Each form submission creates a uniquely named CSV file to prevent overwriting conflicts and to remain compatible with bucket retention policies.
 
 ---
 
-## Architecture
+# System Architecture
 
-Client (Browser)
-→ Express Server (Compute Engine VM)
-→ Google Cloud Storage
-→ CSV file stored in bucket
+## High-Level Architecture Diagram
+
++-------------+        HTTP        +-------------------+        Google API        +----------------------+
+|             |  POST /submit     |                   |   Upload CSV via SDK    |                      |
+|   Browser   | --------------->  |  Express Server   | ----------------------> |  Cloud Storage Bucket|
+|             |                   |  (Compute Engine) |                          |                      |
++-------------+                   +-------------------+                          +----------------------+
 
 ---
 
-## Technologies Used
+# Application Flow
+
+## Sequence Diagram
+
+User
+ |
+ | Fill Form
+ v
+Browser
+ |
+ | POST /submit
+ v
+Express Server
+ |
+ | Validate Data
+ |
+ | Convert to CSV
+ |
+ | Upload via GCS SDK
+ v
+Cloud Storage
+ |
+ | Store file: responses/form_<timestamp>.csv
+ v
+Return 200 OK
+
+---
+
+# Data Flow
+
+[ User Input ]
+      ↓
+[ FormData Object ]
+      ↓
+[ Express req.body ]
+      ↓
+[ CSV Formatter ]
+      ↓
+[ Google Cloud Storage SDK ]
+      ↓
+[ Bucket → responses/ folder ]
+
+---
+
+# UI Wireframe
+
++--------------------------------------------------+
+|                Get in Touch                      |
+|--------------------------------------------------|
+| Full Name       [__________________________]     |
+|                                                  |
+| Email Address   [__________________________]     |
+|                                                  |
+| Contact Number  [__________________________]     |
+|                                                  |
+| Branch          [ Select Branch ▼ ]              |
+|                                                  |
+| Position        [ Select Position ▼ ]            |
+|                                                  |
+|        [ Submit ]           [ Reset ]            |
++--------------------------------------------------+
+
+---
+
+# Technology Stack
 
 - Node.js
 - Express.js
@@ -27,7 +96,7 @@ Client (Browser)
 
 ---
 
-## Project Structure
+# Project Structure
 
 node-app/
 │
@@ -39,85 +108,80 @@ node-app/
 
 ---
 
-## Setup Instructions
+# Installation
 
-### 1. Clone the Repository
+## 1. Clone Repository
 
 git clone https://github.com/Carnage08/node-gcp.git
 cd node-gcp
 
-### 2. Install Dependencies
+## 2. Install Dependencies
 
 npm install
 
 ---
 
-## Google Cloud Configuration
+# Google Cloud Configuration
 
-### VM Configuration
+## VM Requirements
 
 When creating the Compute Engine VM:
 
-- Go to Identity and API access
-- Select:
-  Allow full access to all Cloud APIs
+Identity and API access →  
+Select:
 
-This is required to avoid OAuth scope authorization errors.
+Allow full access to all Cloud APIs
 
 ---
 
-### IAM Role Requirement
+## IAM Role Requirement
 
-Ensure the VM service account has the following role:
+Ensure VM service account has:
 
 Storage Object Admin
 
-You can verify or assign this role from:
+Location:
 IAM & Admin → IAM
 
 ---
 
-### Cloud Storage Bucket
-
-Verify bucket existence:
+## Bucket Verification
 
 gsutil ls
 
-If needed, update the bucket name inside index.js:
+If needed, update bucket name in index.js:
 
 const BUCKET_NAME = "your-bucket-name";
 
 ---
 
-## Firewall Configuration
+# Firewall Configuration
 
-Create an ingress firewall rule:
+Create ingress firewall rule:
 
-Direction: Ingress
-Action: Allow
-Source IP range: 0.0.0.0/0
-Protocol: TCP
-Port: 3000
+Direction: Ingress  
+Action: Allow  
+Source IP: 0.0.0.0/0  
+Protocol: TCP  
+Port: 3000  
 
 ---
 
-## Running the Application
-
-Start the server:
+# Running the Application
 
 node index.js
 
-Access the application:
+Access application:
 
 http://<VM_EXTERNAL_IP>:3000
 
 ---
 
-## API Endpoint
+# API Endpoint
 
 POST /submit
 
-Accepts:
+Fields:
 
 - name
 - email
@@ -125,57 +189,58 @@ Accepts:
 - branch
 - position
 
-Each submission generates a file:
+Each submission generates:
 
 gs://<bucket-name>/responses/form_<timestamp>.csv
 
 ---
 
-## Troubleshooting
+# Security Model
 
-### 403 Provided scope(s) are not authorized
+Compute Engine VM
+        ↓ (OAuth Token with Scope)
+Google Storage API
+        ↓ (IAM Role Validation)
+Cloud Storage Bucket
 
-Cause:
-VM was created without proper API access scope.
+Security Features:
 
-Solution:
-Recreate VM with:
-Allow full access to all Cloud APIs
-
----
-
-### 403 Forbidden (Storage)
-
-Cause:
-Service account missing Storage Object Admin role.
-
-Solution:
-Assign required IAM role.
+- IAM-based authentication
+- No service account key files stored
+- Unique timestamp-based file naming
+- CSV value sanitization
+- Explicit firewall configuration
 
 ---
 
-### Port Not Accessible
+# Troubleshooting
 
-Cause:
-Missing firewall rule.
+403 Provided scope(s) are not authorized  
+Cause: VM created without proper API scope  
+Solution: Recreate VM with "Allow full access to all Cloud APIs"
 
-Solution:
-Create ingress rule allowing TCP port 3000.
+403 Forbidden  
+Cause: Missing Storage Object Admin role  
+Solution: Assign IAM role
+
+Port 3000 not accessible  
+Cause: Missing firewall rule  
+Solution: Allow TCP port 3000
 
 ---
 
-## Key Concepts Demonstrated
+# Key Learning Outcomes
 
 - IAM roles vs OAuth scopes
 - Secure Cloud Storage integration
 - Express async route handling
 - Retention-safe file creation
-- Cloud firewall configuration
+- VM firewall and port configuration
 
 ---
 
-## Author
+# Author
 
-Arjun Yadav
-B.Tech Information Technology
+Arjun Yadav  
+B.Tech Information Technology  
 Cloud and Backend Development

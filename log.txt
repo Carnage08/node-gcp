@@ -1,0 +1,88 @@
+System Check Report - Sun Feb  8 01:49:19 PM IST 2026
+Disk Usage:
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vdc         10G  3.4G  6.3G  35% /
+none            492K  4.0K  488K   1% /dev
+/dev/vdc         10G  3.4G  6.3G  35% /dev/kvm
+tmpfs           100K     0  100K   0% /dev/lxd
+run             7.1G   20K  7.1G   1% /dev/.cros_milestone
+9p              7.7G  1.8M  7.7G   1% /mnt/chromeos
+tmpfs           7.1G     0  7.1G   0% /mnt/external
+/dev/vdb         75M   73M     0 100% /opt/google/cros-containers
+fonts           3.4G  3.0G  336M  91% /usr/share/fonts/chromeos
+tmpfs           100K     0  100K   0% /dev/.lxd-mounts
+devtmpfs        7.1G     0  7.1G   0% /dev/tty
+tmpfs           7.1G  105M  7.0G   2% /dev/shm
+tmpfs           2.9G  132K  2.9G   1% /run
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs           4.0M     0  4.0M   0% /sys/fs/cgroup
+tmpfs           1.5G   40K  1.5G   1% /run/user/1000
+Logged-in User: arjunyadav
+------------------------
+System Check Report - Sun Feb  8 01:52:42 PM IST 2026
+Disk Usage:
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vdc         10G  3.4G  6.3G  35% /
+none            492K  4.0K  488K   1% /dev
+/dev/vdc         10G  3.4G  6.3G  35% /dev/kvm
+tmpfs           100K     0  100K   0% /dev/lxd
+run             7.1G   20K  7.1G   1% /dev/.cros_milestone
+9p              7.7G  1.8M  7.7G   1% /mnt/chromeos
+tmpfs           7.1G     0  7.1G   0% /mnt/external
+/dev/vdb         75M   73M     0 100% /opt/google/cros-containers
+fonts           3.4G  3.0G  336M  91% /usr/share/fonts/chromeos
+tmpfs           100K     0  100K   0% /dev/.lxd-mounts
+devtmpfs        7.1G     0  7.1G   0% /dev/tty
+tmpfs           7.1G  105M  7.0G   2% /dev/shm
+tmpfs           2.9G  132K  2.9G   1% /run
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs           4.0M     0  4.0M   0% /sys/fs/cgroup
+tmpfs           1.5G   40K  1.5G   1% /run/user/1000
+Logged-in User: arjunyadav
+------------------------
+System Check Report - Sun Feb  8 01:53:26 PM IST 2026
+Disk Usage:
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vdc         10G  3.4G  6.3G  35% /
+none            492K  4.0K  488K   1% /dev
+/dev/vdc         10G  3.4G  6.3G  35% /dev/kvm
+tmpfs           100K     0  100K   0% /dev/lxd
+run             7.1G   20K  7.1G   1% /dev/.cros_milestone
+9p              7.7G  1.8M  7.7G   1% /mnt/chromeos
+tmpfs           7.1G     0  7.1G   0% /mnt/external
+/dev/vdb         75M   73M     0 100% /opt/google/cros-containers
+fonts           3.4G  3.0G  336M  91% /usr/share/fonts/chromeos
+tmpfs           100K     0  100K   0% /dev/.lxd-mounts
+devtmpfs        7.1G     0  7.1G   0% /dev/tty
+tmpfs           7.1G  105M  7.0G   2% /dev/shm
+tmpfs           2.9G  132K  2.9G   1% /run
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs           4.0M     0  4.0M   0% /sys/fs/cgroup
+tmpfs           1.5G   40K  1.5G   1% /run/user/1000
+
+Logged-in User: arjunyadav
+------------------------
+
+System Check Report - Sun Feb  8 01:56:17 PM IST 2026
+Disk Usage:
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vdc         10G  3.4G  6.3G  35% /
+none            492K  4.0K  488K   1% /dev
+/dev/vdc         10G  3.4G  6.3G  35% /dev/kvm
+tmpfs           100K     0  100K   0% /dev/lxd
+run             7.1G   20K  7.1G   1% /dev/.cros_milestone
+9p              7.7G  1.8M  7.7G   1% /mnt/chromeos
+tmpfs           7.1G     0  7.1G   0% /mnt/external
+/dev/vdb         75M   73M     0 100% /opt/google/cros-containers
+fonts           3.4G  3.0G  336M  91% /usr/share/fonts/chromeos
+tmpfs           100K     0  100K   0% /dev/.lxd-mounts
+devtmpfs        7.1G     0  7.1G   0% /dev/tty
+tmpfs           7.1G  105M  7.0G   2% /dev/shm
+tmpfs           2.9G  132K  2.9G   1% /run
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs           4.0M     0  4.0M   0% /sys/fs/cgroup
+tmpfs           1.5G   40K  1.5G   1% /run/user/1000
+
+Logged-in User: arjunyadav
+------------------------
+
